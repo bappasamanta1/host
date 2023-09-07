@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love You Sir</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Add styles for the holding page */
+        .holding-page {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgb(222, 229, 249); /* Set the background color to white */
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .loader {
+            border: 4px solid rgba(0, 0, 255, 0.3); /* Set the border color to blue */
+            border-top: 4px solid blue; /* Set the top border color to blue */
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 4s linear infinite; /* Change the animation duration to 4 seconds */
+        }
+        .waiting-text {
+            color: #2f3542; /* Set the text color to #2f3542 */
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="animated-text">
+        <div class="static-text">Happy Teacher's Day Sir</div>
+        <div class="dynamic-text">Bappa Samanta</div>
+    </div>
+    <br>
+    <button class="button" onclick="processLink()">Click here</button>
+    <!-- Holding page content -->
+    <div class="holding-page" id="holdingPage">
+        <div class="loader"></div>
+        <p class="waiting-text">&ensp;Thank You Sir...</p>
+    </div>
+    <script>
+        const dynamicText = document.querySelector(".dynamic-text");
+        const emojis = ["❤️", "🤍", "💙", "💜", "💛"];
+        const colors = ["red", "blue", "white", "green", "purple"];
+        let emojiIndex = 0;
+        let colorIndex = 0;
+        function updateDynamicText() {
+            dynamicText.textContent = `${emojis[emojiIndex]} Bappa Samanta ${emojis[emojiIndex]}`;
+            dynamicText.style.color = colors[colorIndex];
+            emojiIndex = (emojiIndex + 1) % emojis.length;
+            colorIndex = (colorIndex + 1) % colors.length;
+        }
+        // Call updateDynamicText initially
+        updateDynamicText();
+        // Update dynamic text every 2 seconds (adjust the interval as needed)
+        setInterval(updateDynamicText, 2000);
+        function processLink() {
+            const button = document.querySelector(".button");
+            button.classList.add("animate");
+            // Show the holding page
+            const holdingPage = document.getElementById("holdingPage");
+            holdingPage.style.display = "flex";
+            setTimeout(() => {
+                button.classList.remove("animate");
+                // Add a delay of 4000ms (4 seconds) before processing the link
+                setTimeout(() => {
+                    window.location.href = "bappasir.html";
+                }, 4000);
+            }, 600);
+        }
+    </script>
+</body>
+</html>
